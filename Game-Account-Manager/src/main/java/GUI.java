@@ -80,7 +80,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setToolTipText("");
 
-        searchtab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon1.png"))); // NOI18N
+        searchtab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon1.png"))); // NOI18N
         searchtab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchtabMouseClicked(evt);
@@ -92,20 +92,21 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        leaderboardtab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon2.png"))); // NOI18N
+        leaderboardtab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon2.png"))); // NOI18N
         leaderboardtab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leaderboardtabActionPerformed(evt);
             }
         });
 
-        favouritestab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon3.png"))); // NOI18N
+        favouritestab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon3.png"))); // NOI18N
         favouritestab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 favouritestabActionPerformed(evt);
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -168,7 +169,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Player ID#");
 
-        playertab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon1.png"))); // NOI18N
+        playertab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon1.png"))); // NOI18N
         playertab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 playertabMouseClicked(evt);
@@ -422,70 +423,70 @@ public class GUI extends javax.swing.JFrame {
         Leaderboard.setShowGrid(true);
         jScrollPane7.setViewportView(Leaderboard);
 
-        jToggleButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton10ActionPerformed(evt);
             }
         });
 
-        jToggleButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton11ActionPerformed(evt);
             }
         });
 
-        jToggleButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton13ActionPerformed(evt);
             }
         });
 
-        jToggleButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton14ActionPerformed(evt);
             }
         });
 
-        jToggleButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton15ActionPerformed(evt);
             }
         });
 
-        jToggleButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton16ActionPerformed(evt);
             }
         });
 
-        jToggleButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton17ActionPerformed(evt);
             }
         });
 
-        jToggleButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton18ActionPerformed(evt);
             }
         });
 
-        jToggleButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton19ActionPerformed(evt);
             }
         });
 
-        jToggleButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icon4.png"))); // NOI18N
+        jToggleButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
         jToggleButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton20ActionPerformed(evt);

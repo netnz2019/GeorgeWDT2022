@@ -81,7 +81,7 @@
         <Component class="javax.swing.JButton" name="searchtab">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/icon1.png"/>
+              <Image iconType="3" name="/icon1.png"/>
             </Property>
           </Properties>
           <Events>
@@ -92,7 +92,7 @@
         <Component class="javax.swing.JButton" name="leaderboardtab">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Icon2.png"/>
+              <Image iconType="3" name="/Icon2.png"/>
             </Property>
           </Properties>
           <Events>
@@ -102,7 +102,7 @@
         <Component class="javax.swing.JButton" name="favouritestab">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Icon3.png"/>
+              <Image iconType="3" name="/Icon3.png"/>
             </Property>
           </Properties>
           <Events>
@@ -110,6 +110,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Logo.png"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
           </Events>
@@ -222,7 +227,7 @@
                 <Component class="javax.swing.JButton" name="playertab">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/icon1.png"/>
+                      <Image iconType="3" name="/icon1.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -746,7 +751,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton10">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -756,7 +761,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton11">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -766,7 +771,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton13">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -776,7 +781,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton14">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -786,7 +791,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton15">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -796,7 +801,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton16">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -806,7 +811,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton17">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -816,7 +821,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton18">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -826,7 +831,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton19">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -836,7 +841,7 @@
                 <Component class="javax.swing.JToggleButton" name="jToggleButton20">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/Icon4.png"/>
+                      <Image iconType="3" name="/Icon4.png"/>
                     </Property>
                   </Properties>
                   <Events>
