@@ -25,6 +25,8 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         searchtab = new javax.swing.JButton();
         leaderboardtab = new javax.swing.JButton();
@@ -44,16 +46,16 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Stats = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jPanel7 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        rankabove = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        rank = new javax.swing.JTextArea();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        rankbelow = new javax.swing.JTextArea();
+        rankabove = new javax.swing.JTextField();
+        rank = new javax.swing.JTextField();
+        rankbelow = new javax.swing.JTextField();
+        ranknumber = new javax.swing.JLabel();
+        rankminus = new javax.swing.JLabel();
+        rankplus = new javax.swing.JLabel();
         username = new javax.swing.JLabel();
+        ID = new javax.swing.JLabel();
+        jToggleButton21 = new javax.swing.JToggleButton();
         leaderboard = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTextArea1 = new javax.swing.JTextArea();
@@ -70,7 +72,24 @@ public class GUI extends javax.swing.JFrame {
         jToggleButton19 = new javax.swing.JToggleButton();
         jToggleButton20 = new javax.swing.JToggleButton();
         favourite = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        Leaderboard2 = new javax.swing.JTable();
+        jToggleButton30 = new javax.swing.JToggleButton();
+        jToggleButton31 = new javax.swing.JToggleButton();
+        jToggleButton32 = new javax.swing.JToggleButton();
+        jToggleButton33 = new javax.swing.JToggleButton();
+        jToggleButton34 = new javax.swing.JToggleButton();
+        jToggleButton35 = new javax.swing.JToggleButton();
+        jToggleButton36 = new javax.swing.JToggleButton();
+        jToggleButton37 = new javax.swing.JToggleButton();
+        jToggleButton38 = new javax.swing.JToggleButton();
+        jToggleButton39 = new javax.swing.JToggleButton();
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane6.setViewportView(jTextArea3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(836, 552));
@@ -80,7 +99,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setToolTipText("");
 
-        searchtab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon1.png"))); // NOI18N
+        searchtab.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\icon1.png")); // NOI18N
         searchtab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchtabMouseClicked(evt);
@@ -92,21 +111,21 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        leaderboardtab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon2.png"))); // NOI18N
+        leaderboardtab.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon2.png")); // NOI18N
         leaderboardtab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leaderboardtabActionPerformed(evt);
             }
         });
 
-        favouritestab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon3.png"))); // NOI18N
+        favouritestab.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon3.png")); // NOI18N
         favouritestab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 favouritestabActionPerformed(evt);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Logo.png")); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -169,7 +188,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Player ID#");
 
-        playertab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon1.png"))); // NOI18N
+        playertab.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\icon1.png")); // NOI18N
         playertab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 playertabMouseClicked(evt);
@@ -253,13 +272,27 @@ public class GUI extends javax.swing.JFrame {
                 {"Accuracy", null},
                 {"Wins", null},
                 {"Losses", null},
-                {"Points / Game", null}
+                {"Avg Points", null}
             },
             new String [] {
                 "Stat", ""
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Stats.setRowHeight(25);
+        Stats.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Stats);
+        if (Stats.getColumnModel().getColumnCount() > 0) {
+            Stats.getColumnModel().getColumn(0).setResizable(false);
+            Stats.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -287,92 +320,123 @@ public class GUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Rank");
 
-        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextArea2.setText("ID#");
-        jScrollPane2.setViewportView(jTextArea2);
+        rankabove.setEditable(false);
+        rankabove.setText("jTextField1");
+        rankabove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankaboveActionPerformed(evt);
+            }
+        });
 
-        rankabove.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jScrollPane3.setViewportView(rankabove);
+        rank.setEditable(false);
+        rank.setText("jTextField2");
 
-        rank.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jScrollPane4.setViewportView(rank);
+        rankbelow.setEditable(false);
+        rankbelow.setText("jTextField3");
 
-        rankbelow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jScrollPane5.setViewportView(rankbelow);
+        ranknumber.setText("2");
+
+        rankminus.setText("1");
+
+        rankplus.setText("3");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(rankplus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rankminus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ranknumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(rankbelow, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(rank)
+                    .addComponent(rankabove))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rankabove, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(rankminus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rank)
+                    .addComponent(ranknumber, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rankbelow, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(rankplus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         username.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         username.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         username.setText("Username");
 
+        ID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ID.setText("ID#");
+
+        jToggleButton21.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane2)
-                        .addGap(35, 35, 35))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(94, 94, 94)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)))
+                                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(94, 94, 94))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jToggleButton21)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton21))
+                        .addGap(34, 34, 34)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout playerLayout = new javax.swing.GroupLayout(player);
@@ -386,16 +450,19 @@ public class GUI extends javax.swing.JFrame {
         );
         playerLayout.setVerticalGroup(
             playerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerLayout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
+            .addGroup(playerLayout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
         );
 
         Parent.add(player, "card3");
 
+        leaderboard.setPreferredSize(new java.awt.Dimension(830, 430));
+
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
+        jTextArea1.setEditable(false);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTextArea1.setText("LEADERBOARD");
         jTextArea1.setAutoscrolls(false);
@@ -415,78 +482,94 @@ public class GUI extends javax.swing.JFrame {
                 {"10", null, null, null, null}
             },
             new String [] {
-                "Position", "Win Rate", "KDA", "Accuracy", "Points / Game"
+                "Position", "Win Rate", "KDA", "Accuracy", "Avg Points"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         Leaderboard.setGridColor(new java.awt.Color(204, 204, 204));
         Leaderboard.setRowHeight(30);
         Leaderboard.setShowGrid(true);
+        Leaderboard.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(Leaderboard);
+        if (Leaderboard.getColumnModel().getColumnCount() > 0) {
+            Leaderboard.getColumnModel().getColumn(0).setResizable(false);
+            Leaderboard.getColumnModel().getColumn(1).setResizable(false);
+            Leaderboard.getColumnModel().getColumn(2).setResizable(false);
+            Leaderboard.getColumnModel().getColumn(3).setResizable(false);
+            Leaderboard.getColumnModel().getColumn(4).setResizable(false);
+        }
 
-        jToggleButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton10ActionPerformed(evt);
             }
         });
 
-        jToggleButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton11ActionPerformed(evt);
             }
         });
 
-        jToggleButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton13ActionPerformed(evt);
             }
         });
 
-        jToggleButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton14ActionPerformed(evt);
             }
         });
 
-        jToggleButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton15.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton15ActionPerformed(evt);
             }
         });
 
-        jToggleButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton16.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton16ActionPerformed(evt);
             }
         });
 
-        jToggleButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton17.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton17ActionPerformed(evt);
             }
         });
 
-        jToggleButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton18.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton18ActionPerformed(evt);
             }
         });
 
-        jToggleButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton19.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton19ActionPerformed(evt);
             }
         });
 
-        jToggleButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon4.png"))); // NOI18N
+        jToggleButton20.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
         jToggleButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton20ActionPerformed(evt);
@@ -502,7 +585,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(234, 234, 234))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jToggleButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -514,14 +597,14 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jToggleButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jToggleButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,9 +628,9 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jToggleButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout leaderboardLayout = new javax.swing.GroupLayout(leaderboard);
@@ -555,37 +638,209 @@ public class GUI extends javax.swing.JFrame {
         leaderboardLayout.setHorizontalGroup(
             leaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leaderboardLayout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
+                .addContainerGap(103, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addGap(91, 91, 91))
         );
         leaderboardLayout.setVerticalGroup(
             leaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leaderboardLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+            .addGroup(leaderboardLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         Parent.add(leaderboard, "card4");
 
-        jLabel5.setText("Favourites");
+        jPanel8.setBackground(new java.awt.Color(204, 204, 204));
+
+        jTextArea2.setEditable(false);
+        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextArea2.setText("FAVOURITES");
+        jTextArea2.setAutoscrolls(false);
+
+        Leaderboard2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Leaderboard2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null},
+                {"", null, null, null, null, null}
+            },
+            new String [] {
+                "Player", "Rank", "Win Rate", "KDA", "Accuracy", "Avg Points"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Leaderboard2.setGridColor(new java.awt.Color(204, 204, 204));
+        Leaderboard2.setRowHeight(30);
+        Leaderboard2.setShowGrid(true);
+        Leaderboard2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane9.setViewportView(Leaderboard2);
+        if (Leaderboard2.getColumnModel().getColumnCount() > 0) {
+            Leaderboard2.getColumnModel().getColumn(0).setResizable(false);
+            Leaderboard2.getColumnModel().getColumn(1).setResizable(false);
+            Leaderboard2.getColumnModel().getColumn(2).setResizable(false);
+            Leaderboard2.getColumnModel().getColumn(3).setResizable(false);
+            Leaderboard2.getColumnModel().getColumn(4).setResizable(false);
+            Leaderboard2.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        jToggleButton30.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton30ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton31.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton31ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton32.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton32ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton33.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton33ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton34.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton34ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton35.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton35ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton36.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton36ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton37.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton37ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton38.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton38ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton39.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
+        jToggleButton39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton39ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jToggleButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(236, 236, 236)
+                        .addComponent(jTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jToggleButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
 
         javax.swing.GroupLayout favouriteLayout = new javax.swing.GroupLayout(favourite);
         favourite.setLayout(favouriteLayout);
         favouriteLayout.setHorizontalGroup(
             favouriteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(favouriteLayout.createSequentialGroup()
-                .addGap(365, 365, 365)
-                .addComponent(jLabel5)
-                .addContainerGap(411, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, favouriteLayout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
         );
         favouriteLayout.setVerticalGroup(
             favouriteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(favouriteLayout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(jLabel5)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         Parent.add(favourite, "card5");
@@ -692,6 +947,50 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton20ActionPerformed
 
+    private void rankaboveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankaboveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rankaboveActionPerformed
+
+    private void jToggleButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton30ActionPerformed
+
+    private void jToggleButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton31ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton31ActionPerformed
+
+    private void jToggleButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton32ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton32ActionPerformed
+
+    private void jToggleButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton33ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton33ActionPerformed
+
+    private void jToggleButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton34ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton34ActionPerformed
+
+    private void jToggleButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton35ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton35ActionPerformed
+
+    private void jToggleButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton36ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton36ActionPerformed
+
+    private void jToggleButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton37ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton37ActionPerformed
+
+    private void jToggleButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton38ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton38ActionPerformed
+
+    private void jToggleButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton39ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton39ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -728,7 +1027,9 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ID;
     private javax.swing.JTable Leaderboard;
+    private javax.swing.JTable Leaderboard2;
     private javax.swing.JPanel Parent;
     private javax.swing.JTable Stats;
     private javax.swing.JPanel favourite;
@@ -736,7 +1037,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -745,14 +1045,14 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JToggleButton jToggleButton10;
     private javax.swing.JToggleButton jToggleButton11;
     private javax.swing.JToggleButton jToggleButton13;
@@ -763,13 +1063,27 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton18;
     private javax.swing.JToggleButton jToggleButton19;
     private javax.swing.JToggleButton jToggleButton20;
+    private javax.swing.JToggleButton jToggleButton21;
+    private javax.swing.JToggleButton jToggleButton30;
+    private javax.swing.JToggleButton jToggleButton31;
+    private javax.swing.JToggleButton jToggleButton32;
+    private javax.swing.JToggleButton jToggleButton33;
+    private javax.swing.JToggleButton jToggleButton34;
+    private javax.swing.JToggleButton jToggleButton35;
+    private javax.swing.JToggleButton jToggleButton36;
+    private javax.swing.JToggleButton jToggleButton37;
+    private javax.swing.JToggleButton jToggleButton38;
+    private javax.swing.JToggleButton jToggleButton39;
     private javax.swing.JPanel leaderboard;
     private javax.swing.JButton leaderboardtab;
     private javax.swing.JPanel player;
     private javax.swing.JButton playertab;
-    private javax.swing.JTextArea rank;
-    private javax.swing.JTextArea rankabove;
-    private javax.swing.JTextArea rankbelow;
+    private javax.swing.JTextField rank;
+    private javax.swing.JTextField rankabove;
+    private javax.swing.JTextField rankbelow;
+    private javax.swing.JLabel rankminus;
+    private javax.swing.JLabel ranknumber;
+    private javax.swing.JLabel rankplus;
     private javax.swing.JPanel search;
     private javax.swing.JFormattedTextField searchinput;
     private javax.swing.JButton searchtab;
