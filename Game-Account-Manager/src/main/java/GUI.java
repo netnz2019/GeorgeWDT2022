@@ -3,18 +3,178 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-/**
- *
- * @author Donna
- */
-public class GUI extends javax.swing.JFrame {
+import java.io.*;
+import java.util.ArrayList; 
 
-    /**
-     * Creates new form GUI
-     */
+public class GUI extends javax.swing.JFrame implements java.io.Serializable{
+static ArrayList<Player> players = new ArrayList<>();
+public  static void GUI (String[] args){ 
+    menu();
+  }
+
+public static void listAllPlayers(ArrayList<Player> listThese){
+  System.out.println("LIST of players");    
+  for(Player player:listThese){
+    System.out.println(player);
+  }
+  }
+
+public static void listAllPlayerDetails(ArrayList<Player> listThese){
+  System.out.println("LIST of details");
+  for(Player player:listThese){
+    System.out.println(player.getUsername());
+    System.out.println(player.getID());
+    System.out.println(player.getAccuracy());
+    System.out.println(player.getWins());
+    System.out.println(player.getLosses());
+    System.out.println(player.getKills());
+    System.out.println(player.getDeaths());
+    System.out.println(player.getAssists());
+    System.out.println(player.getPoints());
+  }  
+  }
+
+public static String readString(String prompt){   
+   System.out.println(prompt);
+   java.util.Scanner keyboard = new java.util.Scanner(System.in);   
+   return keyboard.nextLine(); 
+    }
+
+ public static int readIntVal(String prompt){   
+    System.out.println(prompt);
+    boolean isAnInt = false;
+    int userInput = 0;
+    while (!isAnInt){
+      try{
+        java.util.Scanner keyboard = new java.util.Scanner(System.in);
+        userInput = keyboard.nextInt(); 
+        isAnInt = true;
+      }catch(Exception e){
+        System.out.println("Try again - not an integer");
+        }
+    }
+    return userInput;
+      
+    }
+    
+ public static void addPlayerMenu(){
+    String username = readString("Please enter the username of the player:");
+    int id = readIntVal("Please enter the id of the player:");
+    int accuracy = readIntVal("Please enter the accuracy of the player:");
+    int wins = readIntVal("Please enter the wins of the player:");
+    int losses = readIntVal("Please enter the losses:");
+    int kills = readIntVal("Please enter the kills of the player:");
+    int deaths = readIntVal("Please enter the deaths of the player:");
+    int assists = readIntVal("Please enter the assists of the player:");
+    int points = readIntVal("Please enter the points of the player:");
+    addPlayer(username, id, accuracy, wins, losses, kills, deaths, assists, points);
+    
+    
+    
+  }
+  
+  public static void addPlayer(String username, int id, int accuracy, int wins, int losses, int kills, int deaths, int assists, int points){
+  Player player = new Player(username, id, accuracy, wins, losses, kills, deaths, assists, points);
+  player.add(player);
+  
+  }
+
+  public static void findUsername(String username){
+  
+  for (int index = 0; index < players.size(); index++){
+    System.out.println(index);
+    if (players.get(index).getUsername().equals(username)){
+      System.out.println("found");
+      
+      System.out.println(players.get(index).getUsername());
+      System.out.println(players.get(index).getID());
+      System.out.println(players.get(index).getAccuracy());
+      System.out.println(players.get(index).getWins());
+      System.out.println(players.get(index).getLosses());
+      System.out.println(players.get(index).getKills());
+      System.out.println(players.get(index).getDeaths());
+      System.out.println(players.get(index).getAssists());
+      System.out.println(players.get(index).getPoints());
+    
+  }
+  
+  }
+  }
+
+  public static void saveAll(){
+          try {
+         FileOutputStream fileOut = new FileOutputStream("players.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(players);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in players.ser");
+      }catch(IOException i) {
+         i.printStackTrace();
+      }
+    
+  }
+
+  public static void loadSaved(){
+  try
+        {
+            FileInputStream fileIn = new FileInputStream("players.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            players = (ArrayList) in.readObject();
+            in.close();
+            fileIn.close();
+         }catch(IOException ioe){
+             ioe.printStackTrace();
+             return;
+          }catch(ClassNotFoundException c){
+             System.out.println("Class not found");
+             c.printStackTrace();
+             return;
+          }
+          
+    
+  }
+  
+  public static void menu(){
+    boolean exit = false;
+    while (exit == false){
+      System.out.println("\n Players Program \n");
+      System.out.println("1. Add a player.");
+      System.out.println("2. List all players");
+      System.out.println("3. Save all.");
+      System.out.println("4. Load saved players.");
+      System.out.println("5. Exit. \n");
+
+      int choice = readIntVal("Please enter your choice... \n");
+      if (choice == 1) {addPlayerMenu();}
+      else if (choice == 2){listAllPlayerDetails(players);}
+      else if (choice == 3) {saveAll();}
+      else if (choice == 4) {loadSaved();}
+      else if (choice == 5){ System.exit(0);}
+      else if (choice < 0 || choice > 5){System.out.println("\n Please choose a number between 1 and 5.\n");} 
+    } 
+  }
+}
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     public GUI() {
         initComponents();
     }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
