@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.ArrayList; 
 
 public class GUI extends javax.swing.JFrame implements java.io.Serializable{
-static ArrayList<Player> players = new ArrayList<>();
+private static ArrayList<Player> playerlist = new ArrayList<Player>();
 public  static void GUI (String[] args){ 
     menu();
   }
@@ -57,44 +57,43 @@ public static String readString(String prompt){
       
     }
     
- public static void addPlayerMenu(){
-    String username = readString("Please enter the username of the player:");
-    int id = readIntVal("Please enter the id of the player:");
-    int accuracy = readIntVal("Please enter the accuracy of the player:");
-    int wins = readIntVal("Please enter the wins of the player:");
-    int losses = readIntVal("Please enter the losses:");
-    int kills = readIntVal("Please enter the kills of the player:");
-    int deaths = readIntVal("Please enter the deaths of the player:");
-    int assists = readIntVal("Please enter the assists of the player:");
-    int points = readIntVal("Please enter the points of the player:");
-    addPlayer(username, id, accuracy, wins, losses, kills, deaths, assists, points);
-    
-    
-    
+ public void addPlayerMenu(){
+    try{
+    String userN = usernamefield.getText();
+    int id = Integer.parseInt(idfield.getText());
+    int accuracy = Integer.parseInt(accuracyfield.getText());
+    int wins = Integer.parseInt(winsfield.getText());
+    int losses = Integer.parseInt(lossesfield.getText());
+    int kills = Integer.parseInt(killsfield.getText());
+    int deaths = Integer.parseInt(deathsfield.getText());
+    int assists = Integer.parseInt(assistsfield.getText());
+    int points = Integer.parseInt(pointsfield.getText());
+    Player plyr = new Player(userN, id, accuracy, wins, losses, kills, deaths, assists, points);
+    playerlist.add(plyr);
+    System.out.println(playerlist.size());
+    }
+    catch(Exception e){
+    warning.setVisible(true);
+    }
   }
-  
-  public static void addPlayer(String username, int id, int accuracy, int wins, int losses, int kills, int deaths, int assists, int points){
-  Player player = new Player(username, id, accuracy, wins, losses, kills, deaths, assists, points);
-  player.add(player);
-  
-  }
-
+ 
   public static void findUsername(String username){
-  
-  for (int index = 0; index < players.size(); index++){
+  System.out.println(playerlist.size());
+  System.out.println(playerlist);
+  for (int index = 0; index < playerlist.size(); index++){
     System.out.println(index);
-    if (players.get(index).getUsername().equals(username)){
+    if (playerlist.get(index).getUsername().equals(username)){
       System.out.println("found");
       
-      System.out.println(players.get(index).getUsername());
-      System.out.println(players.get(index).getID());
-      System.out.println(players.get(index).getAccuracy());
-      System.out.println(players.get(index).getWins());
-      System.out.println(players.get(index).getLosses());
-      System.out.println(players.get(index).getKills());
-      System.out.println(players.get(index).getDeaths());
-      System.out.println(players.get(index).getAssists());
-      System.out.println(players.get(index).getPoints());
+      System.out.println(playerlist.get(index).getUsername());
+      System.out.println(playerlist.get(index).getID());
+      System.out.println(playerlist.get(index).getAccuracy());
+      System.out.println(playerlist.get(index).getWins());
+      System.out.println(playerlist.get(index).getLosses());
+      System.out.println(playerlist.get(index).getKills());
+      System.out.println(playerlist.get(index).getDeaths());
+      System.out.println(playerlist.get(index).getAssists());
+      System.out.println(playerlist.get(index).getPoints());
     
   }
   
@@ -105,74 +104,52 @@ public static String readString(String prompt){
           try {
          FileOutputStream fileOut = new FileOutputStream("players.ser");
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
-         out.writeObject(players);
+         out.writeObject(playerlist);
          out.close();
          fileOut.close();
-         System.out.printf("Serialized data is saved in players.ser");
+         System.out.println("Serialized data is saved in players.ser");
       }catch(IOException i) {
          i.printStackTrace();
       }
     
   }
 
-  public static void loadSaved(){
-  try
-        {
-            FileInputStream fileIn = new FileInputStream("players.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            players = (ArrayList) in.readObject();
-            in.close();
-            fileIn.close();
-         }catch(IOException ioe){
-             ioe.printStackTrace();
-             return;
-          }catch(ClassNotFoundException c){
-             System.out.println("Class not found");
-             c.printStackTrace();
-             return;
-          }
-          
-    
+  public void resetinput(){
+      usernamefield.setText("Please enter a username");
+      idfield.setText("Please enter an ID");
+      accuracyfield.setText("Please enter an accuracy");
+      winsfield.setText("Please enter number of wins");
+      lossesfield.setText("Please enter number of losses");
+      killsfield.setText("Please enter number of kills");
+      deathsfield.setText("Please enter number of deaths");
+      assistsfield.setText("Please enter number of assists");
+      pointsfield.setText("Please enter number of points");
   }
-  
   public static void menu(){
     boolean exit = false;
     while (exit == false){
-      System.out.println("\n Players Program \n");
-      System.out.println("1. Add a player.");
-      System.out.println("2. List all players");
-      System.out.println("3. Save all.");
-      System.out.println("4. Load saved players.");
-      System.out.println("5. Exit. \n");
-
-      int choice = readIntVal("Please enter your choice... \n");
-      if (choice == 1) {addPlayerMenu();}
-      else if (choice == 2){listAllPlayerDetails(players);}
-      else if (choice == 3) {saveAll();}
-      else if (choice == 4) {loadSaved();}
-      else if (choice == 5){ System.exit(0);}
-      else if (choice < 0 || choice > 5){System.out.println("\n Please choose a number between 1 and 5.\n");} 
+      
     } 
   }
-}
   
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+  
     public GUI() {
         initComponents();
+//        try
+//        {
+//            FileInputStream fileIn = new FileInputStream("players.ser");
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            playerlist = (ArrayList) in.readObject();
+//            in.close();
+//            fileIn.close();
+//         }catch(IOException ioe){
+//             ioe.printStackTrace();
+//             return;
+//          }catch(ClassNotFoundException c){
+//             System.out.println("Class not found");
+//             c.printStackTrace();
+//             return;
+//          }
     }
   
 
@@ -188,7 +165,13 @@ public static String readString(String prompt){
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
         Parent = new javax.swing.JPanel();
-        player = new javax.swing.JPanel();
+        search = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        searchinput = new javax.swing.JFormattedTextField();
+        jLabel3 = new javax.swing.JLabel();
+        playertab = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        playerlayer = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -206,21 +189,39 @@ public static String readString(String prompt){
         username = new javax.swing.JLabel();
         ID = new javax.swing.JLabel();
         jToggleButton21 = new javax.swing.JToggleButton();
-        leaderboard = new javax.swing.JPanel();
+        add = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        Leaderboard = new javax.swing.JTable();
-        jToggleButton10 = new javax.swing.JToggleButton();
-        jToggleButton11 = new javax.swing.JToggleButton();
-        jToggleButton13 = new javax.swing.JToggleButton();
-        jToggleButton14 = new javax.swing.JToggleButton();
-        jToggleButton15 = new javax.swing.JToggleButton();
-        jToggleButton16 = new javax.swing.JToggleButton();
-        jToggleButton17 = new javax.swing.JToggleButton();
-        jToggleButton18 = new javax.swing.JToggleButton();
-        jToggleButton19 = new javax.swing.JToggleButton();
-        jToggleButton20 = new javax.swing.JToggleButton();
+        jPanel9 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        usernamefield = new javax.swing.JTextField();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        idfield = new javax.swing.JTextField();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        winsfield = new javax.swing.JTextField();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        accuracyfield = new javax.swing.JTextField();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        assistsfield = new javax.swing.JTextField();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        killsfield = new javax.swing.JTextField();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        deathsfield = new javax.swing.JTextField();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        lossesfield = new javax.swing.JTextField();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        pointsfield = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        warning = new javax.swing.JLabel();
         favourite = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTextArea2 = new javax.swing.JTextArea();
@@ -236,18 +237,12 @@ public static String readString(String prompt){
         jToggleButton37 = new javax.swing.JToggleButton();
         jToggleButton38 = new javax.swing.JToggleButton();
         jToggleButton39 = new javax.swing.JToggleButton();
-        search = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        searchinput = new javax.swing.JFormattedTextField();
-        jLabel3 = new javax.swing.JLabel();
-        playertab = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnsearch = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        btnleaderboard = new javax.swing.JPanel();
+        btnadd = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnfavourites = new javax.swing.JPanel();
@@ -265,6 +260,96 @@ public static String readString(String prompt){
 
         Parent.setBackground(new java.awt.Color(255, 255, 255));
         Parent.setLayout(new java.awt.CardLayout());
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        searchinput.setText("Search");
+        searchinput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchinputMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                searchinputMouseExited(evt);
+            }
+        });
+        searchinput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchinputActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Player ID#");
+
+        playertab.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\icon1.png")); // NOI18N
+        playertab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                playertabMouseClicked(evt);
+            }
+        });
+        playertab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playertabActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchinput, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(playertab, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(playertab, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchinput, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel11.setText("Welcome to StatSpy!");
+
+        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
+        search.setLayout(searchLayout);
+        searchLayout.setHorizontalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addContainerGap(185, Short.MAX_VALUE)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(144, 144, 144))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(214, 214, 214))))
+        );
+        searchLayout.setVerticalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jLabel11)
+                .addGap(118, 118, 118)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(460, Short.MAX_VALUE))
+        );
+
+        Parent.add(search, "card2");
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -458,218 +543,451 @@ public static String readString(String prompt){
                 .addContainerGap(408, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout playerLayout = new javax.swing.GroupLayout(player);
-        player.setLayout(playerLayout);
-        playerLayout.setHorizontalGroup(
-            playerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerLayout.createSequentialGroup()
+        javax.swing.GroupLayout playerlayerLayout = new javax.swing.GroupLayout(playerlayer);
+        playerlayer.setLayout(playerlayerLayout);
+        playerlayerLayout.setHorizontalGroup(
+            playerlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerlayerLayout.createSequentialGroup()
                 .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
         );
-        playerLayout.setVerticalGroup(
-            playerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playerLayout.createSequentialGroup()
+        playerlayerLayout.setVerticalGroup(
+            playerlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(playerlayerLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Parent.add(player, "card3");
+        Parent.add(playerlayer, "card3");
 
-        leaderboard.setPreferredSize(new java.awt.Dimension(830, 430));
+        add.setPreferredSize(new java.awt.Dimension(830, 430));
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextArea1.setText("LEADERBOARD");
-        jTextArea1.setAutoscrolls(false);
-
-        Leaderboard.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Leaderboard.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"1", null, null, null, null},
-                {"2", null, null, null, null},
-                {"3", null, null, null, null},
-                {"4", null, null, null, null},
-                {"5", null, null, null, null},
-                {"6", null, null, null, null},
-                {"7", null, null, null, null},
-                {"8", null, null, null, null},
-                {"9", null, null, null, null},
-                {"10", null, null, null, null}
-            },
-            new String [] {
-                "Position", "Win Rate", "KDA", "Accuracy", "Avg Points"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        Leaderboard.setGridColor(new java.awt.Color(204, 204, 204));
-        Leaderboard.setRowHeight(30);
-        Leaderboard.setShowGrid(true);
-        Leaderboard.getTableHeader().setReorderingAllowed(false);
-        jScrollPane7.setViewportView(Leaderboard);
-        if (Leaderboard.getColumnModel().getColumnCount() > 0) {
-            Leaderboard.getColumnModel().getColumn(0).setResizable(false);
-            Leaderboard.getColumnModel().getColumn(1).setResizable(false);
-            Leaderboard.getColumnModel().getColumn(2).setResizable(false);
-            Leaderboard.getColumnModel().getColumn(3).setResizable(false);
-            Leaderboard.getColumnModel().getColumn(4).setResizable(false);
-        }
-
-        jToggleButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(102, 255, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton10ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jToggleButton11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton11.addActionListener(new java.awt.event.ActionListener() {
+        jPanel10.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setText("Username");
+
+        usernamefield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        usernamefield.setText("jTextField1");
+        usernamefield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usernamefieldMouseClicked(evt);
+            }
+        });
+        usernamefield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton11ActionPerformed(evt);
+                usernamefieldActionPerformed(evt);
             }
         });
 
-        jToggleButton13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton13ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(usernamefield, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(usernamefield, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel11.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel14.setText("ID");
+
+        idfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        idfield.setText("jTextField3");
+        idfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                idfieldMouseClicked(evt);
             }
         });
 
-        jToggleButton14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton14ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(idfield, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(idfield)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel12.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel16.setText("Wins");
+
+        winsfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        winsfield.setText("jTextField5");
+        winsfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                winsfieldMouseClicked(evt);
             }
         });
 
-        jToggleButton15.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton15ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(winsfield, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(winsfield)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel13.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel15.setText("Accuracy");
+
+        accuracyfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        accuracyfield.setText("jTextField4");
+        accuracyfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accuracyfieldMouseClicked(evt);
             }
         });
 
-        jToggleButton16.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton16ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(accuracyfield, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(accuracyfield)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+
+        jPanel18.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel20.setText("Assists");
+
+        assistsfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        assistsfield.setText("jTextField9");
+        assistsfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assistsfieldMouseClicked(evt);
             }
         });
 
-        jToggleButton17.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton17ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(assistsfield)
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(assistsfield)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel16.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel18.setText("Kills");
+
+        killsfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        killsfield.setText("jTextField7");
+        killsfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                killsfieldMouseClicked(evt);
             }
         });
 
-        jToggleButton18.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton18ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(killsfield)
+                .addContainerGap())
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(killsfield)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel17.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel19.setText("Deaths");
+
+        deathsfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deathsfield.setText("jTextField8");
+        deathsfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deathsfieldMouseClicked(evt);
             }
         });
 
-        jToggleButton19.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton19ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deathsfield)
+                .addContainerGap())
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(deathsfield)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel15.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel17.setText("Losses");
+
+        lossesfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lossesfield.setText("jTextField6");
+        lossesfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lossesfieldMouseClicked(evt);
             }
         });
 
-        jToggleButton20.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\Icon4.png")); // NOI18N
-        jToggleButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton20ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lossesfield)
+                .addContainerGap())
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lossesfield)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel19.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel21.setText("Points");
+
+        pointsfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pointsfield.setText("jTextField10");
+        pointsfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pointsfieldMouseClicked(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pointsfield)
+                .addContainerGap())
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pointsfield)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
+        );
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel12.setText("Add New Player");
+
+        warning.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        warning.setForeground(new java.awt.Color(255, 51, 51));
+        warning.setText("PLEASE USE LETTERS AND NUMBERS ONLY!!");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(234, 234, 234))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jToggleButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(277, 277, 277))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(warning, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(118, 118, 118))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jToggleButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12))
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(warning, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout leaderboardLayout = new javax.swing.GroupLayout(leaderboard);
-        leaderboard.setLayout(leaderboardLayout);
-        leaderboardLayout.setHorizontalGroup(
-            leaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leaderboardLayout.createSequentialGroup()
-                .addContainerGap(163, Short.MAX_VALUE)
+        javax.swing.GroupLayout addLayout = new javax.swing.GroupLayout(add);
+        add.setLayout(addLayout);
+        addLayout.setHorizontalGroup(
+            addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
-        leaderboardLayout.setVerticalGroup(
-            leaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leaderboardLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+        addLayout.setVerticalGroup(
+            addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(432, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        Parent.add(leaderboard, "card4");
+        Parent.add(add, "card4");
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -864,96 +1182,6 @@ public static String readString(String prompt){
 
         Parent.add(favourite, "card5");
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        searchinput.setText("Search");
-        searchinput.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                searchinputMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                searchinputMouseExited(evt);
-            }
-        });
-        searchinput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchinputActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Player ID#");
-
-        playertab.setIcon(new javax.swing.ImageIcon("C:\\Users\\Donna\\Documents\\GitHub\\GeorgeWDT2022\\Game-Account-Manager\\src\\images\\icon1.png")); // NOI18N
-        playertab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                playertabMouseClicked(evt);
-            }
-        });
-        playertab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playertabActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchinput, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(playertab, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(playertab, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(searchinput, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel11.setText("Welcome to StatSpy!");
-
-        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
-        search.setLayout(searchLayout);
-        searchLayout.setHorizontalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addContainerGap(185, Short.MAX_VALUE)
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(144, 144, 144))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(214, 214, 214))))
-        );
-        searchLayout.setVerticalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(jLabel11)
-                .addGap(118, 118, 118)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(460, Short.MAX_VALUE))
-        );
-
-        Parent.add(search, "card2");
-
         getContentPane().add(Parent);
         Parent.setBounds(450, 0, 890, 850);
 
@@ -1016,11 +1244,11 @@ public static String readString(String prompt){
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        btnleaderboard.setBackground(new java.awt.Color(141, 164, 186));
-        btnleaderboard.setPreferredSize(new java.awt.Dimension(460, 100));
-        btnleaderboard.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnadd.setBackground(new java.awt.Color(141, 164, 186));
+        btnadd.setPreferredSize(new java.awt.Dimension(460, 100));
+        btnadd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnleaderboardMouseClicked(evt);
+                btnaddMouseClicked(evt);
             }
         });
 
@@ -1034,24 +1262,24 @@ public static String readString(String prompt){
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(71, 71, 71));
-        jLabel8.setText("Leaderboard");
+        jLabel8.setText("Add");
 
-        javax.swing.GroupLayout btnleaderboardLayout = new javax.swing.GroupLayout(btnleaderboard);
-        btnleaderboard.setLayout(btnleaderboardLayout);
-        btnleaderboardLayout.setHorizontalGroup(
-            btnleaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnleaderboardLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnaddLayout = new javax.swing.GroupLayout(btnadd);
+        btnadd.setLayout(btnaddLayout);
+        btnaddLayout.setHorizontalGroup(
+            btnaddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnaddLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(104, Short.MAX_VALUE))
         );
-        btnleaderboardLayout.setVerticalGroup(
-            btnleaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnleaderboardLayout.createSequentialGroup()
+        btnaddLayout.setVerticalGroup(
+            btnaddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnaddLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(btnleaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(btnaddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -1108,7 +1336,7 @@ public static String readString(String prompt){
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnleaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnfavourites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -1123,7 +1351,7 @@ public static String readString(String prompt){
                 .addGap(50, 50, 50)
                 .addComponent(btnsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btnleaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnfavourites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(294, Short.MAX_VALUE))
@@ -1141,9 +1369,10 @@ public static String readString(String prompt){
 
     private void playertabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playertabActionPerformed
         Parent.removeAll();
-        Parent.add(player);
+        Parent.add(playerlayer);
         Parent.repaint();
         Parent.revalidate();
+        findUsername(searchinput.getText());
     }//GEN-LAST:event_playertabActionPerformed
 
     private void searchinputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchinputMouseClicked
@@ -1156,46 +1385,6 @@ public static String readString(String prompt){
 
     private void playertabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playertabMouseClicked
     }//GEN-LAST:event_playertabMouseClicked
-
-    private void jToggleButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton10ActionPerformed
-
-    private void jToggleButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton11ActionPerformed
-
-    private void jToggleButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton13ActionPerformed
-
-    private void jToggleButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton14ActionPerformed
-
-    private void jToggleButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton15ActionPerformed
-
-    private void jToggleButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton16ActionPerformed
-
-    private void jToggleButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton17ActionPerformed
-
-    private void jToggleButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton18ActionPerformed
-
-    private void jToggleButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton19ActionPerformed
-
-    private void jToggleButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton20ActionPerformed
 
     private void rankaboveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankaboveActionPerformed
         // TODO add your handling code here:
@@ -1251,7 +1440,7 @@ public static String readString(String prompt){
 
     private void btnsearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsearchMouseClicked
         btnsearch.setBackground(new java.awt.Color(155, 182, 206));
-        btnleaderboard.setBackground(new java.awt.Color(141,164,186));
+        btnadd.setBackground(new java.awt.Color(141,164,186));
         btnfavourites.setBackground(new java.awt.Color(141,164,186));
         Parent.removeAll();
         Parent.add(search);
@@ -1259,19 +1448,21 @@ public static String readString(String prompt){
         Parent.revalidate();
     }//GEN-LAST:event_btnsearchMouseClicked
 
-    private void btnleaderboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnleaderboardMouseClicked
+    private void btnaddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddMouseClicked
         btnsearch.setBackground(new java.awt.Color(141,164,186));
-        btnleaderboard.setBackground(new java.awt.Color(155, 182, 206));
+        btnadd.setBackground(new java.awt.Color(155, 182, 206));
         btnfavourites.setBackground(new java.awt.Color(141,164,186));
         Parent.removeAll();
-        Parent.add(leaderboard);
+        Parent.add(add);
         Parent.repaint();
         Parent.revalidate();
-    }//GEN-LAST:event_btnleaderboardMouseClicked
+        resetinput();
+        warning.setVisible(false);
+    }//GEN-LAST:event_btnaddMouseClicked
 
     private void btnfavouritesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfavouritesMouseClicked
         btnsearch.setBackground(new java.awt.Color(141,164,186));
-        btnleaderboard.setBackground(new java.awt.Color(141,164,186));
+        btnadd.setBackground(new java.awt.Color(141,164,186));
         btnfavourites.setBackground(new java.awt.Color(155, 182, 206));
         Parent.removeAll();
         Parent.add(favourite);
@@ -1281,7 +1472,7 @@ public static String readString(String prompt){
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         Parent.removeAll();
-        Parent.add(leaderboard);
+        Parent.add(add);
         Parent.repaint();
         Parent.revalidate();
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -1303,6 +1494,54 @@ public static String readString(String prompt){
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
 
     }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        addPlayerMenu();
+        resetinput();
+        saveAll();
+        warning.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void usernamefieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernamefieldActionPerformed
+        
+    }//GEN-LAST:event_usernamefieldActionPerformed
+
+    private void usernamefieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernamefieldMouseClicked
+        usernamefield.setText("");
+    }//GEN-LAST:event_usernamefieldMouseClicked
+
+    private void idfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idfieldMouseClicked
+        idfield.setText("");
+    }//GEN-LAST:event_idfieldMouseClicked
+
+    private void accuracyfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuracyfieldMouseClicked
+        accuracyfield.setText("");
+    }//GEN-LAST:event_accuracyfieldMouseClicked
+
+    private void winsfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_winsfieldMouseClicked
+        winsfield.setText("");
+    }//GEN-LAST:event_winsfieldMouseClicked
+
+    private void lossesfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lossesfieldMouseClicked
+        lossesfield.setText("");
+    }//GEN-LAST:event_lossesfieldMouseClicked
+
+    private void killsfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_killsfieldMouseClicked
+        killsfield.setText("");
+    }//GEN-LAST:event_killsfieldMouseClicked
+
+    private void deathsfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deathsfieldMouseClicked
+        deathsfield.setText("");
+    }//GEN-LAST:event_deathsfieldMouseClicked
+
+    private void assistsfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assistsfieldMouseClicked
+        assistsfield.setText("");
+    }//GEN-LAST:event_assistsfieldMouseClicked
+
+    private void pointsfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pointsfieldMouseClicked
+        pointsfield.setText("");
+    }//GEN-LAST:event_pointsfieldMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1339,18 +1578,33 @@ public static String readString(String prompt){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ID;
-    private javax.swing.JTable Leaderboard;
     private javax.swing.JTable Leaderboard2;
     private javax.swing.JPanel Parent;
     private javax.swing.JTable Stats;
+    private javax.swing.JTextField accuracyfield;
+    private javax.swing.JPanel add;
+    private javax.swing.JTextField assistsfield;
+    private javax.swing.JPanel btnadd;
     private javax.swing.JPanel btnfavourites;
-    private javax.swing.JPanel btnleaderboard;
     private javax.swing.JPanel btnsearch;
+    private javax.swing.JTextField deathsfield;
     private javax.swing.JPanel favourite;
+    private javax.swing.JTextField idfield;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1359,6 +1613,16 @@ public static String readString(String prompt){
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1366,23 +1630,12 @@ public static String readString(String prompt){
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JToggleButton jToggleButton10;
-    private javax.swing.JToggleButton jToggleButton11;
-    private javax.swing.JToggleButton jToggleButton13;
-    private javax.swing.JToggleButton jToggleButton14;
-    private javax.swing.JToggleButton jToggleButton15;
-    private javax.swing.JToggleButton jToggleButton16;
-    private javax.swing.JToggleButton jToggleButton17;
-    private javax.swing.JToggleButton jToggleButton18;
-    private javax.swing.JToggleButton jToggleButton19;
-    private javax.swing.JToggleButton jToggleButton20;
     private javax.swing.JToggleButton jToggleButton21;
     private javax.swing.JToggleButton jToggleButton30;
     private javax.swing.JToggleButton jToggleButton31;
@@ -1394,9 +1647,11 @@ public static String readString(String prompt){
     private javax.swing.JToggleButton jToggleButton37;
     private javax.swing.JToggleButton jToggleButton38;
     private javax.swing.JToggleButton jToggleButton39;
-    private javax.swing.JPanel leaderboard;
-    private javax.swing.JPanel player;
+    private javax.swing.JTextField killsfield;
+    private javax.swing.JTextField lossesfield;
+    private javax.swing.JPanel playerlayer;
     private javax.swing.JButton playertab;
+    private javax.swing.JTextField pointsfield;
     private javax.swing.JTextField rank;
     private javax.swing.JTextField rankabove;
     private javax.swing.JTextField rankbelow;
@@ -1406,5 +1661,8 @@ public static String readString(String prompt){
     private javax.swing.JPanel search;
     private javax.swing.JFormattedTextField searchinput;
     private javax.swing.JLabel username;
+    private javax.swing.JTextField usernamefield;
+    private javax.swing.JLabel warning;
+    private javax.swing.JTextField winsfield;
     // End of variables declaration//GEN-END:variables
 }

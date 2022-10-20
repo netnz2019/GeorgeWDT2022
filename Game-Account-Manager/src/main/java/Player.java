@@ -92,3 +92,4 @@ public class Player implements java.io.Serializable{
   public void setPoints(int points){
   this.points = points;
   }
+}
